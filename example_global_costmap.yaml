@@ -1,0 +1,36 @@
+global_costmap:
+  global_costmap:
+    ros__parameters:
+      transform_tolerance: 0.5
+      update_frequency: 5.0
+      publish_frequency: 5.0
+      width: 15
+      height: 15
+      global_frame: map
+      robot_base_frame: base_footprint
+      footprint: "[[0.219575,0.245], [-0.3955,0.245], [-0.3955,-0.245], [0.219575,-0.245]]"
+      resolution: 0.05
+      track_unknown_space: true
+      plugins: ["static_layer", "obstacle_layer", "inflation_layer"]
+      obstacle_layer:
+        plugin: "nav2_costmap_2d::ObstacleLayer"
+        enabled: True
+        observation_sources: scan virtual_obstacle_source
+        scan:
+          topic: /scan
+          max_obstacle_height: 2.0
+          clearing: True
+          marking: True
+          data_type: "LaserScan"
+          raytrace_max_range: 9.0
+          raytrace_min_range: 0.0
+          obstacle_max_range: 8.0
+          obstacle_min_range: 0.0
+        virtual_obstacle_source:
+         topic: /Global_virtual_wall
+         data_type: PointCloud2
+         max_obstacle_height: 2.0
+         clearing: True
+         marking: True
+         obstacle_range: 5.0
+         raytrace_range: 6.0
