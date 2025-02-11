@@ -1,4 +1,7 @@
 # ROS2-Virtual_wall
+
+[Note] The map topic must exist.
+
 ros2-jazzy version package
 1) launch
 ros2 launch virtual_wall virtual_wall.launch.py
