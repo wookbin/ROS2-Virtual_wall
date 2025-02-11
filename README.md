@@ -1,6 +1,6 @@
 # ROS2-Virtual_wall
 
-[Note] The map topic must exist.
+[note] The map topic must exist.
 
 ros2-jazzy version package
 1) launch
