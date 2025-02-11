@@ -105,39 +105,38 @@ public:
         tf2_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
         tf2_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf2_buffer_);
 
-		//virtual obstacle publisher
-		global_virtual_obstacles_publisher = this->create_publisher<sensor_msgs::msg::PointCloud2>("Global_virtual_wall", 10);
-		local_virtual_obstacles_publisher  = this->create_publisher<sensor_msgs::msg::PointCloud2>("Local_virtual_wall", 10);
+	//virtual obstacle publisher
+	global_virtual_obstacles_publisher = this->create_publisher<sensor_msgs::msg::PointCloud2>("Global_virtual_wall", 10);
+	local_virtual_obstacles_publisher  = this->create_publisher<sensor_msgs::msg::PointCloud2>("Local_virtual_wall", 10);
 
-		//subscribe ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		map_subscriber = this->create_subscription<nav_msgs::msg::OccupancyGrid>(
-			"map", rclcpp::SensorDataQoS(), std::bind(&VIRTUAL_WALL::map_Callback, this, _1));
+	//subscribe ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	map_subscriber = this->create_subscription<nav_msgs::msg::OccupancyGrid>(
+	"map", rclcpp::SensorDataQoS(), std::bind(&VIRTUAL_WALL::map_Callback, this, _1));
 
-		//Service list///////////////////////////////////////////////////////////////////////////////////////
-		virtual_obstacles_cmd_srv = create_service<virtual_wall::srv::AddVirtualWall>(
-            "add_virtual_wall_cmd",
-        std::bind(&VIRTUAL_WALL::Add_Virtual_Obstacle_Command, this, std::placeholders::_1, std::placeholders::_2));
-		
-		//map -> odom TF CALC Timer
-		CALC_TF_timer_ = this->create_wall_timer(1000ms, std::bind(&VIRTUAL_WALL::CALC_TF_Timer, this)); //1sec
+	//Service list///////////////////////////////////////////////////////////////////////////////////////
+	virtual_obstacles_cmd_srv = create_service<virtual_wall::srv::AddVirtualWall>(
+	"add_virtual_wall_cmd",
+	std::bind(&VIRTUAL_WALL::Add_Virtual_Obstacle_Command, this, std::placeholders::_1, std::placeholders::_2));
+	
+	//map -> odom TF CALC Timer
+	CALC_TF_timer_ = this->create_wall_timer(1000ms, std::bind(&VIRTUAL_WALL::CALC_TF_Timer, this)); //1sec
 
 	}
 
 	////value//////////////////////////////////////////////////////////////////////////////
 	rclcpp::Time current_time;
 	rclcpp::TimerBase::SharedPtr CALC_TF_timer_;
-    std::shared_ptr<tf2_ros::Buffer> tf2_buffer_;
-    std::shared_ptr<tf2_ros::TransformListener> tf2_listener_;
+    	std::shared_ptr<tf2_ros::Buffer> tf2_buffer_;
+    	std::shared_ptr<tf2_ros::TransformListener> tf2_listener_;
 
 	//virtual_obstacles_publisher///////////////////////////////////////////////////////////////////////
-    rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr global_virtual_obstacles_publisher;
+    	rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr global_virtual_obstacles_publisher;
 	rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr local_virtual_obstacles_publisher;
 	std::map<int, sensor_msgs::msg::PointCloud2> polygon_global_costmap;
 	std::map<int, sensor_msgs::msg::PointCloud2> polygon_local_costmap;
 
 	//Subscription ////////////////////////////////////////////////////////////////////////////////////
 	rclcpp::Subscription<nav_msgs::msg::OccupancyGrid>::SharedPtr map_subscriber;
-
 
 	//Subscribe Callback Function ////////////////////////////////////////////////////////////////////////////////////
 	void map_Callback(const nav_msgs::msg::OccupancyGrid::SharedPtr msg)
@@ -553,7 +552,7 @@ int main(int argc, char * argv[])
 		
 		if(m_bActive_map)
 		{
-			//Check map file
+			//to do....
 		}
 		
 	
