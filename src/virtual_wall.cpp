@@ -102,24 +102,24 @@ public:
 	VIRTUAL_WALL() : Node("virtual_wall")
 	{
 		// Initialize the TF2 buffer and listener
-        tf2_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
-        tf2_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf2_buffer_);
-
-	//virtual obstacle publisher
-	global_virtual_obstacles_publisher = this->create_publisher<sensor_msgs::msg::PointCloud2>("Global_virtual_wall", 10);
-	local_virtual_obstacles_publisher  = this->create_publisher<sensor_msgs::msg::PointCloud2>("Local_virtual_wall", 10);
-
-	//subscribe ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	map_subscriber = this->create_subscription<nav_msgs::msg::OccupancyGrid>(
-	"map", rclcpp::SensorDataQoS(), std::bind(&VIRTUAL_WALL::map_Callback, this, _1));
-
-	//Service list///////////////////////////////////////////////////////////////////////////////////////
-	virtual_obstacles_cmd_srv = create_service<virtual_wall::srv::AddVirtualWall>(
-	"add_virtual_wall_cmd",
-	std::bind(&VIRTUAL_WALL::Add_Virtual_Obstacle_Command, this, std::placeholders::_1, std::placeholders::_2));
+	        tf2_buffer_ = std::make_shared<tf2_ros::Buffer>(this->get_clock());
+	        tf2_listener_ = std::make_shared<tf2_ros::TransformListener>(*tf2_buffer_);
 	
-	//map -> odom TF CALC Timer
-	CALC_TF_timer_ = this->create_wall_timer(1000ms, std::bind(&VIRTUAL_WALL::CALC_TF_Timer, this)); //1sec
+		//virtual obstacle publisher
+		global_virtual_obstacles_publisher = this->create_publisher<sensor_msgs::msg::PointCloud2>("Global_virtual_wall", 10);
+		local_virtual_obstacles_publisher  = this->create_publisher<sensor_msgs::msg::PointCloud2>("Local_virtual_wall", 10);
+	
+		//subscribe ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		map_subscriber = this->create_subscription<nav_msgs::msg::OccupancyGrid>(
+		"map", rclcpp::SensorDataQoS(), std::bind(&VIRTUAL_WALL::map_Callback, this, _1));
+	
+		//Service list///////////////////////////////////////////////////////////////////////////////////////
+		virtual_obstacles_cmd_srv = create_service<virtual_wall::srv::AddVirtualWall>(
+		"add_virtual_wall_cmd",
+		std::bind(&VIRTUAL_WALL::Add_Virtual_Obstacle_Command, this, std::placeholders::_1, std::placeholders::_2));
+		
+		//map -> odom TF CALC Timer
+		CALC_TF_timer_ = this->create_wall_timer(1000ms, std::bind(&VIRTUAL_WALL::CALC_TF_Timer, this)); //1sec
 
 	}
 
