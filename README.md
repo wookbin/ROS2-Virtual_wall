@@ -22,3 +22,6 @@ ros2 service call /add_virtual_wall_cmd virtual_wall/srv/AddVirtualWall "{polygo
 3.2) Delete 2nd 1 square from 2 squares
 
 ros2 service call /add_virtual_wall_cmd virtual_wall/srv/AddVirtualWall "{ids: [2], remove: true}"
+
+
+# Reference link: https://blog.naver.com/zzang0736/223756576487
