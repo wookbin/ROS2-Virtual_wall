@@ -8,6 +8,7 @@ ros2 launch virtual_wall virtual_wall.launch.py
 /Local_virtual_wall  # Type: sensor_msgs/msg/PointCloud2
 
 3) service call
+   
 3.1) Create 2 squares
 
 ros2 service call /add_virtual_wall_cmd virtual_wall/srv/AddVirtualWall "{polygons: [
