@@ -23,5 +23,8 @@ ros2 service call /add_virtual_wall_cmd virtual_wall/srv/AddVirtualWall "{polygo
 
 ros2 service call /add_virtual_wall_cmd virtual_wall/srv/AddVirtualWall "{ids: [2], remove: true}"
 
+![Image](https://github.com/user-attachments/assets/5df8d765-4ece-4d12-819d-ba662ca80463)
+
+
 
 # Reference link: https://blog.naver.com/zzang0736/223756576487
