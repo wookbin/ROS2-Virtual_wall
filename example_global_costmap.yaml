@@ -4,8 +4,8 @@ global_costmap:
       transform_tolerance: 0.5
       update_frequency: 5.0
       publish_frequency: 5.0
-      width: 15
-      height: 15
+      width: 100
+      height: 100
       global_frame: map
       robot_base_frame: base_footprint
       footprint: "[[0.219575,0.245], [-0.3955,0.245], [-0.3955,-0.245], [0.219575,-0.245]]"
